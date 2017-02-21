@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en"> 
+   <head>
+      <meta charset="UTF-8">
+      <title>AngularJS Custom Directive Application</title>
+       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+   </head>
+  
+   <body ng-app="myApp" ng-controller="app">   
+        
+        <p>Data is : {{name}}</p>  <!-- scope  true so all work individual -->
+        <p>Age is : {{age}}</p>
+        <input type="button" ng-click="funAlert()" value="Controller Alert">
+        <div my-first-script name="{{name}}" age="age" fun="funAlert()"></div>  <!-- age="age" becozz we use it by directive in scope as a two way binding so {{}} not require -->
+
+       
+         <!-- we can write directive name to access the directive data
+         in html need to write like my-first-script
+         in script like myFirstScript
+         -->
+<script type="text/javascript">
+        var app = angular.module('myApp',[]);
+
+        app.directive('myFirstScript', function(){
+          
+          return {
+            restrict: 'EA',  // we can also use restrict: 'EA' Element A attribute
+            
+            scope: {   // @ -text bind   // = -two way bind  // & -one way bind
+              name: '@',  // name is a attribute in div tag in html page so we get data from html 
+              age: '=', // for two way bindiing becozz name not change in first element
+              fun: '&'  //one way bind 
+            },  
+            template: ['<p>Directive take name Text from html and html take text from Controller: {{name}}</p>',
+                        '<input type="text" ng-model="name"/>',
+                        '<p>Directive take age Text from html and html take text from Controller: {{age}}</p>',
+                        '<input type="text" ng-model="age"/>',
+                        '<p>Directive take alert function from html and html take function from Controller</p>',
+                        ' <input type="button" ng-click="fun()" value="Controller Alert"/>'
+       ,
+                        ].join("")
+          };
+        });
+
+        app.controller('app',function($scope) {
+          $scope.name = "Pawandeep Singh";
+          $scope.age = 24;
+          $scope.funAlert = function(){
+            alert("Hello i am here");
+          }
+        });
+
+      </script>
+
+    </body>
+
+   <html>
+   
+  
+
+<!--
+How AngularJS integrates with HTML
+ng mean angular
+app mean app name
+ng-app directive indicates the start of AngularJS application.
+ng-model directive then creates a model variable named "name" which can be used with the html page and within the div having ng-app directive.
+ng-bind then uses the name model to be displayed in the html span tag whenever user input something in the text box.
+Closing</div> tag indicates the end of AngularJS application.
+-->

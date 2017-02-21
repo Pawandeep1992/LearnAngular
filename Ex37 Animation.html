@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+   
+   <head>
+      <meta charset="UTF-8">
+      <title>AngularJS Fifth Application Filters</title>
+       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+       <style>
+         .animate.ng-enter, .animate.ng-leave{
+          transition: 500ms linear all;
+         }
+         .animate.ng-leave.ng-leave-active{
+           opacity: 0;
+         }
+         .animate.ng-enter.ng-enter-active{
+           opacity: 0;
+         }
+       </style>
+   </head>
+   
+   <body>   
+      <div ng-controller="School">
+      Search Subject <input type="text" ng-model="SubName">
+        <p class="animate" ng-repeat= "subMarks in Student.subjects | filter:SubName ">
+          Name : {{subMarks.namem}}
+          Marks : {{subMarks.mark}}
+       </p>
+     
+
+      </div>
+
+       <script type="text/javascript">
+        var application = angular.module('myApp',['ngAnimate']);
+        application.controller('School',function($scope) {
+          
+       $scope.Student = {
+            subjects:[
+            { namem:'Physics', mark:67 },
+            { namem:'Math', mark:80 },
+            { namem:'Arts', mark:86  },
+            { namem:'social', mark:55}
+            ]
+          };  
+        });
+        </script>
+    </body>
+
+   <html>
+   
+  
+
+<!--
+How AngularJS integrates with HTML
+ng mean angular
+app mean app name
+ng-app directive indicates the start of AngularJS application.
+ng-model directive then creates a model variable named "name" which can be used with the html page and within the div having ng-app directive.
+ng-bind then uses the name model to be displayed in the html span tag whenever user input something in the text box.
+Closing</div> tag indicates the end of AngularJS application.
+-->

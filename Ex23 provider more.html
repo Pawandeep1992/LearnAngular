@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" ng-app="myLang">
+   
+   <head>
+      <meta charset="UTF-8">
+      <title>AngularJS Fifth Application Controller</title>
+       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+   </head>
+   
+   <body>   
+      <div ng-controller="language">
+      
+       <br/>
+       <h1> Provider is a head of service and the factory </h1>
+       <span> {{ greetMessage }} </span>
+      </div>
+
+      <script type="text/javascript">
+        var application = angular.module('myLang',[]);
+
+
+        application.provider('date',function(){ 
+          var greet;
+          return {
+            setDayAlert: function(value){ not accessible from controller 
+              greet = value;
+            },
+            $get: function(){   // get function executed by injector and its accesible by controller
+              return {
+                showData: function(){
+                  var  date = new Date();
+                  return greet+"Its"+date.getHours();
+                },
+                devshowData: function(){
+                  var  date = new Date();
+                  return date.getHours();
+                }
+              }
+            }
+          }
+        });
+
+        application.config(function(dateProvider){    //data means Provider name
+          var time = dateProvider.$get().devshowData();
+          if(time > 0 && time <12){
+            dateProvider.setDayAlert("Good morning !!");
+          }
+          else if(time > 12 && time <17){
+            dateProvider.setDayAlert("Good day !!");
+          }
+          else if(time > 12 && time <17){
+            dateProvider.setDayAlert("Good evening !!");
+          }
+          else{
+           dateProvider.setDayAlert("Good night !!"); 
+          }
+        });
+
+        application.controller('language',function($scope,date) {
+         $scope.greetMessage = date.showData();
+        }); 
+      </script>
+    </body>
+
+   <html>
+   
+  
+
+<!--
+How AngularJS integrates with HTML
+ng mean angular
+app mean app name
+ng-app directive indicates the start of AngularJS application.
+ng-model directive then creates a model variable named "name" which can be used with the html page and within the div having ng-app directive.
+ng-bind then uses the name model to be displayed in the html span tag whenever user input something in the text box.
+Closing</div> tag indicates the end of AngularJS application.
+-->

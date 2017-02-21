@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+   
+   <head>
+      <meta charset="UTF-8">
+      <title>AngularJS Fifth Application Filters</title>
+       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+   </head>
+   
+   <body>   
+      <div ng-controller="School">
+        Name <input type="text" ng-model="name"/>
+
+        <h1>UpperCase : {{ name | uppercase }}</h1>
+        <h1>LowerCase : {{ name | lowercase }}</h1>
+
+         Price <input type="text" ng-model="price"/>
+        <h1>{{ price | currency }}</h1>
+        <h1>{{ price | currency:"Rs." }}</h1>
+        <h1>{{ price | currency:"Rs.":0 }}</h1>  <!-- 0 mean 0 decimal-->
+        <h1>{{ price | currency:"Rs.":4 }}</h1>  <!-- 4 mean 4 decimal-->
+
+         Number <input type="text" ng-model="num"/>
+        <h1>{{ num | number }}</h1>
+        <h1>{{ num | number:4 }}</h1>
+
+        <div>{{ {a:3, b:'hi', c:{aa:35} } | json }}</div>    <!-- JSON FILTER Format an object to a JSON string. -->
+
+
+        <h1>Customer:</h1>
+        <pre>{{customer | json}}</pre>  <!-- JSON FILTER Format an object to a JSON string. -->
+
+        <h1>Carnames:</h1>
+        <pre>{{cars | json}}</pre>
+
+        Student FirstName : <input type="text" ng-model="Student.FirstName">
+        Student LastName  : <input type="text" ng-model="Student.LastName">
+        Enter Subject : <input type="text" ng-model="SubName">
+        <p> Full Name {{Student.FullName()}}</p>
+
+        <p ng-repeat= "subMarks in Student.subjects | filter:SubName ">
+          Name : {{subMarks.namem}}
+          Marks : {{subMarks.mark}}
+       </p>
+       <h4>Ordered Marks List</h4>
+        <p ng-repeat= "subM in Student.subjects | orderBy:'mark' ">
+          Name : {{subM.namem}}
+          Marks : {{subM.mark}}
+       </p>
+
+
+      </div>
+
+       <script type="text/javascript">
+        var application = angular.module('myApp',[]);
+        application.controller('School',function($scope) {
+          $scope.name="pawan";
+          $scope.price= 12; 
+         $scope.num= 1;
+         $scope.customer={
+          "Name":"pawan",
+          "Education":"btech",
+          "Experience":1.2
+         };
+         $scope.cars = ["Audi", "BMW", "Ford"];
+       $scope.Student = {
+            FirstName:"pawandeep ",
+            LastName:"singh",
+            FullName: function(){
+              var ob;
+              ob = $scope.Student;
+              return ob.FirstName+" "+ob.LastName;
+            },
+            subjects:[
+            { namem:'Physics', mark:67 },
+            { namem:'Math', mark:80 },
+            { namem:'Arts', mark:86  },
+            { namem:'social', mark:55}
+            ]
+          };  
+        });
+        </script>
+    </body>
+
+   <html>
+   
+  
+
+<!--
+How AngularJS integrates with HTML
+ng mean angular
+app mean app name
+ng-app directive indicates the start of AngularJS application.
+ng-model directive then creates a model variable named "name" which can be used with the html page and within the div having ng-app directive.
+ng-bind then uses the name model to be displayed in the html span tag whenever user input something in the text box.
+Closing</div> tag indicates the end of AngularJS application.
+-->
