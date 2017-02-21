@@ -1,0 +1,6 @@
+double click the miniweb which will open cmd where u will see 
+http://192.168.0.101:8000/    
+webpage url past it in a web-browser. it will open the index.html 
+u put our program in index.html 
+
+miniweb is a server
