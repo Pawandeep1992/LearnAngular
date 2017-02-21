@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+   <head>
+      <title>Angular JS Include</title>
+       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>  
+	  <style>
+         table, th , td {
+            border: 1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+         }
+         
+         table tr:nth-child(odd) {
+            background-color: #f2f2f2;
+         }
+         
+         table tr:nth-child(even) {
+            background-color: #ffffff;
+         }
+      </style>
+      
+   </head>
+   <body>
+      hi
+	  <div ng-app="mainApp" ng-controller="StudentController">
+	     <div ng-include="'main.html'"></div>
+		 <div ng-include="'Subjects.html'"></div>
+	  </div>
+	  
+      <script>
+         angular.module("mainApp", []).controller('StudentController', function($scope) {
+            $scope.Student={firstName:"PAWANDEEP",lastName:"SINGH",fee:500,
+			sub:[ 
+				{name:'Physics',marks:70} ,
+				{name:'chemistry',marks:80},
+				{name:'Maths',marks:90}
+				],
+			fullName: function()
+			{
+			var StudentObject;
+			StudentObject= $scope.Student;
+			return StudentObject.firstName + " " + StudentObject.lastName;
+			}
+			};
+			
+			});
+      </script>
+      
+   </body>
+</html>
+
+
+<!--
+How AngularJS integrates with HTML
+ng-app directive indicates the start of AngularJS application.
+ng-model directive then creates a model variable named "name" which can be used with the html page and within the div having ng-app directive.
+ng-bind then uses the name model to be displayed in the html span tag whenever user input something in the text box.
+Closing</div> tag indicates the end of AngularJS application.
+-->
